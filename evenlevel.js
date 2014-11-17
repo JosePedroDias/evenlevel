@@ -77,6 +77,9 @@ var NODE = !window;
 	}
 
 	/**
+	 * The following API is exposed for each opened store  
+	 * see `evenlevel` below
+	 *
 	 * @class ELStore
 	 */
 	var elStore = function elStore(lowLevelStore, options) {
@@ -280,13 +283,16 @@ var NODE = !window;
 	};
 
 	/**
+	 * This object is exposed in the browser as `window.evenlevel`  
+	 * On node.js it is the result of `require('evenlevel')`
+	 *
 	 * @namespace evenlevel
 	 */
 
 	var evenlevel = {
 		/**
-		 * mode 'raw' saves string documents
-		 * mode 'json' saves JSON objects (w/ no loops)
+		 * mode 'raw' saves string documents  
+		 * mode 'json' saves JSON objects (w/ no loops)  
 		 * mode 'withMeta' stores `_createdAt` and `_updatedAt` times, `_version` number, `_author` (if set on options) and `_id` (key)
 		 * 
 		 * @function getStore

@@ -8,7 +8,8 @@
 ## Class: ELStore
 
 
-
+The following API is exposed for each opened store  
+see `evenlevel` below
 
 
 **put**(key, value, [callback]) *function*
@@ -129,7 +130,8 @@ Removes DB and voids API
 ## Namespace: evenlevel
 
 
-
+This object is exposed in the browser as `window.evenlevel`  
+On node.js it is the result of `require('evenlevel')`
 
 
 `ELStore`
@@ -147,8 +149,8 @@ Removes DB and voids API
 
 > **returns** `ELStore` - evenlevel store API
 
-mode 'raw' saves string documents
-mode 'json' saves JSON objects (w/ no loops)
+mode 'raw' saves string documents  
+mode 'json' saves JSON objects (w/ no loops)  
 mode 'withMeta' stores `_createdAt` and `_updatedAt` times, `_version` number, `_author` (if set on options) and `_id` (key)
 
 
