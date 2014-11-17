@@ -1,3 +1,11 @@
+[![dependency status](https://david-dm.org/josepedrodias/evenlevel.png)](https://david-dm.org/josepedrodias/evenlevel)
+[![published version](https://badge.fury.io/js/evenlevel.png)](http://badge.fury.io/js/evenlevel)
+[![still maintained?](http://stillmaintained.com/JosePedroDias/evenlevel.png)](http://stillmaintained.com/JosePedroDias/evenlevel)
+
+[![NPM](https://nodei.co/npm/evenlevel.png?compact=true)](https://nodei.co/npm/evenlevel/)
+[![NPM](https://nodei.co/npm-dl/evenlevel.png?months=3)](https://nodei.co/npm/evenlevel/)
+
+
 easy API for leveldb on both nodejs and browser
 
 uses these internally:
