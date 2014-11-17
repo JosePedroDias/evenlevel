@@ -6,6 +6,7 @@
     "debug":           false,
     "skipJSON":        true,
     "skipIdentifiers": true,
+    "sortChildren":    false,
     "title":           "evenlevel API",
     "sourceFiles": [
         "evenlevel.js"
