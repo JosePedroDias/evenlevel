@@ -1,90 +1,89 @@
 'use strict';
 
+/*global evenlevel:false*/
+
+
+/*
+  -- evenlevel test drive --
+  
+  open your console and copy &amp; paste these
+  empty lines mean submit and watch the result
+*/
+
+
+// aux functions
 var cb = function(err, res) { console.log(err, res); };
-
-var cbTrue = function(v) { console.log(v); return true; };
-
+var cb1 = function(v) { console.log(v); };
+var cbTrue = function(v) { console.log(v); return 1; };
 var clone = function(o) {
-	return JSON.parse( JSON.stringify(o) );
+  return JSON.parse( JSON.stringify(o) );
 };
-
 var O = {};
 
 
-// to keep this legible, I'm not wrapping each consecutive call on function callbacks
-// of course you should
 
-
-evenlevel.getStore('bag0', function(err, x) {
-	x.put('a', 'b');
-	x.get('a', cb);
+// using default raw mode on d1
+evenlevel.getStore('demo1', function(err, store) {
+  if (err) { return window.alert(err); }
+  window.d1 = store;
 });
 
-evenlevel.getStore('bag1', {mode:'json'}, function(err, x) {
-	x.put('a', {name:'john', age:20});
-	x.get('a', cb);
+d1.put('lennon', 'john')
+
+d1.put(null, 'paul', cb1) // autogen key
+
+d1.batch([
+  {key:'starr', value:'ringo'}, // auto type 'put'
+  {value:'george'}, // autogen key
+  {type:'del', key:'lennon'} // removing, value is irrelevant here
+], cb1)
+
+d1.getPairsRanging(cbTrue)
+
+d1.truncate() // no docs now!
+
+d1.getPairsRanging(cbTrue)
+
+
+
+// using json mode on d2
+evenlevel.getStore('demo2', {mode:'json'}, function(err, store) {
+  if (err) { return window.alert(err); }
+  window.d2 = store;
 });
 
-evenlevel.getStore('bag2', {mode:'withMeta', author:'jsad'}, function(err, x) {
-	x.put('a', {name:'john', age:20});
-
-	x.get('a', cb);
-
-	x.get('a', function(o) {
-		o.surname = 'rambo';
-		x.put('a', o);
-	});
-
-	x.get('a', cb);
-
-	'abcdefghijklmnopqrstuvwxyz'.split('').forEach(function(k) {
-		x.put(k, clone(O));
-	});
-
-	x.getValuesRanging(function(v) { console.log(v); return Math.random() < 0.95; });
-
-	x.getValuesRanging(cbTrue);
-
-	x.getValuesRanging(cbTrue, 0, 'f', 'j');
-
-	x.getValuesRanging(cbTrue, 1, 'f', 'j');
-
-	x.batch([
-		{type:'del', key:'zxc', value:clone(O)},
-		{type:'put', key:'zxd', value:clone(O)},
-		{type:'put', key:'zxz', value:clone(O)}], cb);
-
-	x.batch([{value:clone(O)}, {value:clone(O)}, {value:clone(O)}], cb);
-
-	x.batch([{type:'del', key:'undef'}], cb);
+// create some docs
+'abcdefghijklmnopqrstuvwxyz'.split('').forEach(function(k) {
+	d2.put(k, clone(O));
 });
 
-evenlevel.getStore('table_x', {mode:'withMeta'}, function(err, store) {
-	if (err) { throw err; }
+// ranged queries
+d2.getValuesRanging(cbTrue)
 
-	store.put('key1', {name:'Jesus', age:33}); // cb is optional
-	store.put(null, {name:'Mahometh', age:50}); // autogens key if not provided
+d2.getKeysRanging(cbTrue)
 
-	store.put('key1', {name:'Jesus', age:33, year:0}); // overriding
+d2.getPairsRanging(cbTrue, true)
 
-	store.get('key1', cb); // notice how the version has increased
+d2.getPairsRanging(cbTrue, false, 'd', 'g')
 
-	store.del('key1');
 
-	store.batch([
-		{type:'put', key:'xcv', value:{name:'batman'},    // simple case: everything specified in put
-		{type:'put', value:{_id:'zxc', name:'spiderman'}, // if _id is set, it is used
-		{type:'put', value:{name:'he-man'},               // no key or _id, autogen
-		{value:{name:'sheena'},                           // put is the default op
-		{type:'del', key:'key1'}                          // delete, requires key and only key.
-	], errOrOk);
 
-	store.getKeysRanging(logTrue, true) // all keys descending
-	// NOTICE: the itemFn will only keep fetching if returns trueish, therefore the logTrue usage.
-
-	store.getKeysRanging(logTrue, false, 'd', 'j'); // keys from 'd' to 'j' ascending
-
-	store.getValuesRanging(logTrue, false, 'd', 'j'); // values from 'd' to 'j' ascending
-
-	//store.drop() // store deleted. unusable from now on.
+// using with meta mode on d2
+evenlevel.getStore('demo3', {mode:'withMeta'}, function(err, store) {
+  if (err) { return window.alert(err); }
+  window.d3 = store;
 });
+
+// create some docs
+'abcdef'.split('').forEach(function(k) {
+	d3.put(k, clone(O));
+});
+
+d3.getValuesRanging(cbTrue)
+
+// update some docs
+'bcd'.split('').forEach(function(k) {
+	d3.put(k, clone(O));
+});
+
+d3.getValuesRanging(cbTrue)

@@ -31,7 +31,7 @@ check [here](API.md)
 
 ## Example usage
 
-check [here](examples.js)
+check [static example](examples.js) and [jsbin](http://jsbin.com/dijiri/latest/quiet)
 
 
 ## if you want to develop

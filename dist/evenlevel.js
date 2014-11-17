@@ -112,7 +112,7 @@ var NODE = !window;
 		function(isKeys, itemCb, descending, startK, endK) {
 			var itemCb2 = function(v, cur, trans) {
 				if (v === null) { return itemCb(null); }
-				var res = itemCb( isKeys ? cur.key : dec(v) );
+				var res = itemCb( isKeys === 'both' ? {key:cur.key, value:dec(v)} : (isKeys ? cur.key : dec(v)) );
 				if (res) { cur['continue'](); }
 			};
 			lowLevelStore.iterate(itemCb2, {
