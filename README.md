@@ -34,6 +34,27 @@ check [here](API.md)
 check [here](examples.js)
 
 
+## if you want to develop
+
+get the code from github:
+
+    git clone git@github.com:JosePedroDias/evenlevel.git
+    cd evenlevel
+
+install dependencies
+
+    npm install
+    make deps
+
+do your editing of `evenlevel.js` ...
+
+rebuild browser bundles:
+
+    make build
+
+check demos for using in both the browser and node.js...
+
+
 ## TODO
 
 * needs unit tests!

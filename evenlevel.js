@@ -2,7 +2,7 @@ var NODE = !window;
 
 
 (function() {
-	'use strict'
+	'use strict';
 	var leveldb;
 
 	if (NODE) {
@@ -53,7 +53,7 @@ var NODE = !window;
 			},
 			decode: function(v) { return JSON.parse(v); }
 		}
-	}
+	};
 
 	/**
 	 * The following API is exposed for each opened store  
@@ -101,7 +101,7 @@ var NODE = !window;
 					return itemCb(null);
 				}
 				else {
-					var res = itemCb( isKeys ? k : dec(v) );
+					var res = itemCb( isKeys === 'both' ? {key:k, value:dec(v)} : (isKeys ? k : dec(v)) );
 					if (res) { it.next(onNext); }
 					else { it.end(noop); }
 				}
@@ -229,15 +229,44 @@ var NODE = !window;
 				getRanging(false, itemCb, descending, startK, endK);
 			},
 
-			/*getAllValues: function getAllValues(cb) {
-				lowLevelStore.getAll(function(res) {
-					cb(res.map(dec));
-				});
-			},*/
+			/**
+			 * if the `itemCallback` function returns falsy, iteration will be halted
+			 * 
+			 * @function getPairsRanging
+			 * @param {Function} itemCallback cb signature is `cb(kvOrNull)`.
+		     * @param {Boolean} [descending] trueish if descending is desired
+		     * @param {String}  [startKey] defines a start key
+		     * @param {String}  [endKey] defines an end key
+			 */
+			getPairsRanging: function getPairsRanging(itemCb, descending, startK, endK) {
+				getRanging('both', itemCb, descending, startK, endK);
+			},
 
-			/*truncate: function truncate(cb) { // remove all entries
-				lowLevelStore.clear(cb);
-			},*/
+			/**
+			 * removes all documents from the store
+			 *
+			 * @function truncate
+			 * @param {Function} [callback] cb signature is `cb(err)`.
+			 */
+			truncate: function truncate(cb) { // remove all entries
+				if (!cb) { cb = noop; }
+				if (NODE) {
+					var batch = [];
+					var that = this;
+					this.getKeysRanging(function(d) {
+						if (d === null) {
+							that.batch(batch, cb);
+						}
+						else {
+							batch.push({type:'del', key:d});
+							return true;
+						}
+					});
+				}
+				else {
+					lowLevelStore.clear(cb);
+				}
+			},
 
 			/**
 			 * Removes DB and voids API

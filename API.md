@@ -115,6 +115,38 @@ if the `itemCallback` function returns falsy, iteration will be halted
 
 
 ---
+**getPairsRanging**(itemCallback, [descending], [startKey], [endKey]) *function*
+
+> `Function` **itemCallback** - cb signature is `cb(kvOrNull)`.
+
+> `Boolean` [**descending**] - trueish if descending is desired
+
+> `String` [**startKey**] - defines a start key
+
+> `String` [**endKey**] - defines an end key
+
+
+
+if the `itemCallback` function returns falsy, iteration will be halted
+
+
+
+
+
+---
+**truncate**([callback]) *function*
+
+> `Function` [**callback**] - cb signature is `cb(err)`.
+
+
+
+removes all documents from the store
+
+
+
+
+
+---
 **drop**() *function*
 
 

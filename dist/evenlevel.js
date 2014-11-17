@@ -3,7 +3,7 @@ var NODE = !window;
 
 
 (function() {
-	'use strict'
+	'use strict';
 	var leveldb;
 
 	if (NODE) {
@@ -54,7 +54,7 @@ var NODE = !window;
 			},
 			decode: function(v) { return JSON.parse(v); }
 		}
-	}
+	};
 
 	/**
 	 * The following API is exposed for each opened store  
@@ -102,7 +102,7 @@ var NODE = !window;
 					return itemCb(null);
 				}
 				else {
-					var res = itemCb( isKeys ? k : dec(v) );
+					var res = itemCb( isKeys === 'both' ? {key:k, value:dec(v)} : (isKeys ? k : dec(v)) );
 					if (res) { it.next(onNext); }
 					else { it.end(noop); }
 				}
@@ -230,15 +230,44 @@ var NODE = !window;
 				getRanging(false, itemCb, descending, startK, endK);
 			},
 
-			/*getAllValues: function getAllValues(cb) {
-				lowLevelStore.getAll(function(res) {
-					cb(res.map(dec));
-				});
-			},*/
+			/**
+			 * if the `itemCallback` function returns falsy, iteration will be halted
+			 * 
+			 * @function getPairsRanging
+			 * @param {Function} itemCallback cb signature is `cb(kvOrNull)`.
+		     * @param {Boolean} [descending] trueish if descending is desired
+		     * @param {String}  [startKey] defines a start key
+		     * @param {String}  [endKey] defines an end key
+			 */
+			getPairsRanging: function getPairsRanging(itemCb, descending, startK, endK) {
+				getRanging('both', itemCb, descending, startK, endK);
+			},
 
-			/*truncate: function truncate(cb) { // remove all entries
-				lowLevelStore.clear(cb);
-			},*/
+			/**
+			 * removes all documents from the store
+			 *
+			 * @function truncate
+			 * @param {Function} [callback] cb signature is `cb(err)`.
+			 */
+			truncate: function truncate(cb) { // remove all entries
+				if (!cb) { cb = noop; }
+				if (NODE) {
+					var batch = [];
+					var that = this;
+					this.getKeysRanging(function(d) {
+						if (d === null) {
+							that.batch(batch, cb);
+						}
+						else {
+							batch.push({type:'del', key:d});
+							return true;
+						}
+					});
+				}
+				else {
+					lowLevelStore.clear(cb);
+				}
+			},
 
 			/**
 			 * Removes DB and voids API
@@ -2816,7 +2845,7 @@ module.exports = AbstractChainedBatch
 }).call(this,require('_process'))
 },{"_process":34}],22:[function(require,module,exports){
 module.exports=require(5)
-},{"/Users/jdias/Work/evenlevel/node_modules/level-js/node_modules/abstract-leveldown/abstract-iterator.js":5,"_process":34}],23:[function(require,module,exports){
+},{"/home/jdias/Work/evenlevel/node_modules/level-js/node_modules/abstract-leveldown/abstract-iterator.js":5,"_process":34}],23:[function(require,module,exports){
 (function (process,Buffer){
 /* Copyright (c) 2013 Rod Vagg, MIT License */
 
@@ -3069,7 +3098,7 @@ module.exports.AbstractChainedBatch = AbstractChainedBatch
 }).call(this,require('_process'),require("buffer").Buffer)
 },{"./abstract-chained-batch":21,"./abstract-iterator":22,"_process":34,"buffer":28,"xtend":24}],24:[function(require,module,exports){
 module.exports=require(7)
-},{"/Users/jdias/Work/evenlevel/node_modules/level-js/node_modules/abstract-leveldown/node_modules/xtend/index.js":7}],25:[function(require,module,exports){
+},{"/home/jdias/Work/evenlevel/node_modules/level-js/node_modules/abstract-leveldown/node_modules/xtend/index.js":7}],25:[function(require,module,exports){
 (function (process,__filename){
 
 /**
