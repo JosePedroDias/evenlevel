@@ -335,6 +335,15 @@ var NODE = !window;
 		 */
 		availableModes: function availableModes() {
 			return Object.keys(modes);
+		},
+
+		/**
+		 * @function getId
+		 * @param {String} [prefix] optional prefix to add to the id
+		 * @return {String} new id. based on date and a local counter (to make sure in fast calls the same id isn't returned twice)
+		 */
+		getId: function(prefix) {
+			return (prefix || '') + nowS();
 		}
 	};
 

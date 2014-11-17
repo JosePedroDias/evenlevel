@@ -202,6 +202,20 @@ mode 'withMeta' stores `_createdAt` and `_updatedAt` times, `_version` number, `
 
 
 ---
+`String`
+**getId**([prefix]) *function*
+
+> `String` [**prefix**] - optional prefix to add to the id
+
+> **returns** `String` - new id. based on date and a local counter (to make sure in fast calls the same id isn't returned twice)
+
+
+
+
+
+
+
+---
 
 
 
