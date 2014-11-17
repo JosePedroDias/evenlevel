@@ -1,0 +1,37 @@
+{
+  "name": "evenlevel",
+  "version": "0.0.0",
+  "description": "easy API for leveldb on both nodejs and browser",
+  "main": "evenlevel.js",
+  "preferGlobal": false,
+  "directories": {},
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JosePedroDias/evenlevel.git"
+  },
+  "keywords": [
+    "leveldb",
+    "indexeddb",
+    "browser",
+    "simple",
+    "node",
+    "javascript"
+  ],
+  "author": {
+    "name": "José Pedro Dias",
+    "email": "jose.pedro.dias@gmail.com",
+    "url": "http://josepedrodias.com/"
+  },
+  "engines": {
+    "node": ">= 0.10.x"
+  },
+  "dependencies": {
+    "leveldown": "^1.0.0"
+  },
+  "devDependencies": {
+    "level-js": "^2.1.6"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
