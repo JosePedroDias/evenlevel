@@ -1,4 +1,4 @@
-build:
+build: doc
 	@browserify evenlevel.js > dist/evenlevel.js
 	@uglifyjs dist/evenlevel.js  > dist/evenlevel.min.js
 
