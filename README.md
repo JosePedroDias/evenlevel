@@ -2,17 +2,23 @@ easy API for leveldb on both nodejs and browser
 
 uses these internally:
 
-* https://github.com/maxogden/level.js
-* https://github.com/rvagg/node-leveldown
+* [level-js](https://github.com/maxogden/level.js) (on the browser)
+* [leveldown](https://github.com/rvagg/node-leveldown) (on node.js)
 
 
 to use it in node.js, require the evenlevel.js on the root
 to use it in a browser, link to evenlevel files in the dist dir
 
 
+TODO
+
+* needs unit tests!
+* needs better API docs and examples
+
+
 
 ```javascript
-	evenlevel.getStore('table_x', function(err, store) {
+	evenlevel.getStore('table_x', {mode:'withMeta'}, function(err, store) {
 	if (err) { throw err; }
 
 	var errOrOk = function(err) { console.log(err ? err : 'OK'); };
