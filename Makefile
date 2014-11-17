@@ -7,3 +7,4 @@ serve:
 
 dependencies:
 	sudo npm install -g browserify
+	sudo npm install -g inkdoc

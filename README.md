@@ -10,10 +10,15 @@ to use it in node.js, require the evenlevel.js on the root
 to use it in a browser, link to evenlevel files in the dist dir
 
 
-TODO
+## API
+
+check [here](API.md)
+
+
+## TODO
 
 * needs unit tests!
-* needs better API docs and examples
+* better examples
 
 
 
