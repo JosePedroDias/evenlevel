@@ -1,6 +1,6 @@
 {
   "name": "evenlevel",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "easy API for leveldb on both nodejs and browser",
   "main": "evenlevel.js",
   "preferGlobal": false,

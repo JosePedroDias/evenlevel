@@ -1,5 +1,4 @@
 var NODE = !window;
-//console.log('NODE?', NODE);
 
 
 (function() {
@@ -12,26 +11,6 @@ var NODE = !window;
 	else {
 		leveldb = require('level-js');
 	}
-
-
-	/*var cb = function(err, res) { console.log(err, res); };
-	window.cb = cb;
-
-	var cb1 = function(v) { console.log(v); };
-	window.cb1 = cb1;
-
-	var expose = function(err, x) {
-		if (err) { return console.error(err); }
-		window.x = x;
-	};
-	window.expose = expose;
-	var clone = function(o) {
-		return JSON.parse( JSON.stringify(o) );
-	};
-	window.clone = clone;
-	window.O = {};
-	window.cbTrue = function(v) { console.log(v); return true; };*/
-
 
 
 
@@ -309,11 +288,8 @@ var NODE = !window;
 				options = {};
 			}
 			options.storeName = storeName;
-			// so far supported options: mode:raw|json|withMeta, author:string
 
-			//leveldb(storeName).open(function(err, lowLevelStore) {
 			var lowLevelStore0 = leveldb(storeName);
-			console.log(lowLevelStore0);
 			lowLevelStore0.open(function(err, lowLevelStore) {
 				if (!lowLevelStore) {
 					lowLevelStore = lowLevelStore0;
@@ -323,6 +299,7 @@ var NODE = !window;
 				cb(null, elStore(lowLevelStore, options));
 			});
 		},
+
 		/**
 		 * @function availableModes
 		 * @return {String[]} available modes
