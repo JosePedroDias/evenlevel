@@ -6,16 +6,22 @@
 [![NPM](https://nodei.co/npm-dl/evenlevel.png?months=3)](https://nodei.co/npm/evenlevel/)
 
 
-easy API for leveldb on both nodejs and browser
+Easy API for leveldb on both node.js and the browser.
+Isomorphic JavaScript FTW!
 
-uses these internally:
+It uses these internally:
 
-* [level-js](https://github.com/maxogden/level.js) (on the browser)
+* [level-js](https://github.com/maxogden/level.js) (on the browser, via indexedDB)
 * [leveldown](https://github.com/rvagg/node-leveldown) (on node.js)
 
 
-to use it in node.js, require the evenlevel.js on the root
+to use it in node.js:
+
+`var evenlevel = require('evenlevel');`
+
 to use it in a browser, link to evenlevel files in the dist dir
+
+`<script src="dist/evenlevel.min.js"></script>`
 
 
 ## API
@@ -31,6 +37,8 @@ check [here](API.md)
 
 
 ```javascript
+	// the following are disconnected examples of calls. will write better examples later :P
+
 	evenlevel.getStore('table_x', {mode:'withMeta'}, function(err, store) {
 	if (err) { throw err; }
 
