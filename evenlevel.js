@@ -225,7 +225,7 @@ var NODE = !window;
 			 * if the `itemCallback` function returns falsy, iteration will be halted
 			 *
 			 * @function getKeysRanging
-			 * @param {Function} [itemCallback] cb signature is `cb(keyOrNull)`.
+			 * @param {Function} itemCallback cb signature is `cb(keyOrNull)`.
 		     * @param {Boolean} [descending] trueish if descending is desired
 		     * @param {String}  [startKey] defines a start key
 		     * @param {String}  [endKey] defines an end key
@@ -238,7 +238,7 @@ var NODE = !window;
 			 * if the `itemCallback` function returns falsy, iteration will be halted
 			 * 
 			 * @function getValuesRanging
-			 * @param {Function} [itemCallback] cb signature is `cb(valueOrNull)`.
+			 * @param {Function} itemCallback cb signature is `cb(valueOrNull)`.
 		     * @param {Boolean} [descending] trueish if descending is desired
 		     * @param {String}  [startKey] defines a start key
 		     * @param {String}  [endKey] defines an end key
