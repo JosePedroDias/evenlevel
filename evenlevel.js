@@ -1,4 +1,4 @@
-var NODE = !window;
+var NODE = (typeof window === 'undefined');
 
 
 (function() {
@@ -348,7 +348,10 @@ var NODE = !window;
 		}
 	};
 
-	if (!NODE) {
+	if (NODE) {
+		module.exports = evenlevel;
+	}
+	else {
 		window.evenlevel = evenlevel;
 	}
 
