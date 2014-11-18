@@ -19,9 +19,9 @@ var NODE = !window;
 
 	var _32Pow4 = Math.pow(32, 4);
 	var counter = 0;
-	var nowS = function() {
+	var nowS = function(t) {
 		counter = (counter + 1) % _32Pow4;
-		return now().toString(32) + counter.toString(32);
+		return ( t || now() ).toString(32) + counter.toString(32);
 	};
 
 	var noop = function() {};
@@ -341,10 +341,11 @@ var NODE = !window;
 		/**
 		 * @function getId
 		 * @param {String} [prefix] optional prefix to add to the id
+		 * @param {Number} [ts] timestamp such as `(new Date()).valueOf()`
 		 * @return {String} new id. based on date and a local counter (to make sure in fast calls the same id isn't returned twice)
 		 */
-		getId: function(prefix) {
-			return (prefix || '') + nowS();
+		getId: function(prefix, t) {
+			return (prefix || '') + nowS(t);
 		}
 	};
 
@@ -2854,7 +2855,7 @@ module.exports = AbstractChainedBatch
 }).call(this,require('_process'))
 },{"_process":34}],22:[function(require,module,exports){
 module.exports=require(5)
-},{"/home/jdias/Work/evenlevel/node_modules/level-js/node_modules/abstract-leveldown/abstract-iterator.js":5,"_process":34}],23:[function(require,module,exports){
+},{"/Users/jdias/Work/evenlevel/node_modules/level-js/node_modules/abstract-leveldown/abstract-iterator.js":5,"_process":34}],23:[function(require,module,exports){
 (function (process,Buffer){
 /* Copyright (c) 2013 Rod Vagg, MIT License */
 
@@ -3107,7 +3108,7 @@ module.exports.AbstractChainedBatch = AbstractChainedBatch
 }).call(this,require('_process'),require("buffer").Buffer)
 },{"./abstract-chained-batch":21,"./abstract-iterator":22,"_process":34,"buffer":28,"xtend":24}],24:[function(require,module,exports){
 module.exports=require(7)
-},{"/home/jdias/Work/evenlevel/node_modules/level-js/node_modules/abstract-leveldown/node_modules/xtend/index.js":7}],25:[function(require,module,exports){
+},{"/Users/jdias/Work/evenlevel/node_modules/level-js/node_modules/abstract-leveldown/node_modules/xtend/index.js":7}],25:[function(require,module,exports){
 (function (process,__filename){
 
 /**

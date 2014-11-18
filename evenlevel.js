@@ -18,9 +18,9 @@ var NODE = !window;
 
 	var _32Pow4 = Math.pow(32, 4);
 	var counter = 0;
-	var nowS = function() {
+	var nowS = function(t) {
 		counter = (counter + 1) % _32Pow4;
-		return now().toString(32) + counter.toString(32);
+		return ( t || now() ).toString(32) + counter.toString(32);
 	};
 
 	var noop = function() {};
@@ -340,10 +340,11 @@ var NODE = !window;
 		/**
 		 * @function getId
 		 * @param {String} [prefix] optional prefix to add to the id
+		 * @param {Number} [ts] timestamp such as `(new Date()).valueOf()`
 		 * @return {String} new id. based on date and a local counter (to make sure in fast calls the same id isn't returned twice)
 		 */
-		getId: function(prefix) {
-			return (prefix || '') + nowS();
+		getId: function(prefix, t) {
+			return (prefix || '') + nowS(t);
 		}
 	};
 
